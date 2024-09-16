@@ -2,6 +2,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import surveyRoute from './Router/surveyRouter.js'
 import takingSurveyRouter from './Router/takingSurveyRouter.js' 
+import resultOfSurveyRouter from './Router/resultOfSurveyRouter.js'
 
 const app = express()
 const port = 6000
@@ -14,6 +15,7 @@ app.get('/', (req, res) => {
 
 app.use('/survey',surveyRoute)
 app.use('/taking-survey',takingSurveyRouter)
+app.use('/result-survey',resultOfSurveyRouter)
 
 
 mongoose.connect(Mongo_URL)
