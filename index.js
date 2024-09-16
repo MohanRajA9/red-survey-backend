@@ -1,22 +1,26 @@
 import express from 'express'
 import mongoose from 'mongoose'
-import surveyRoute from './Router/surveyRouter.js'
+import createSurveyRoute from './Router/surveyRouter.js'
 import takingSurveyRouter from './Router/takingSurveyRouter.js' 
 import resultOfSurveyRouter from './Router/resultOfSurveyRouter.js'
+import surveyLoginRouter from './Router/surveyLoginRouter.js'
+import { auth } from './middleware/auth.js'
 
 const app = express()
-const port = 6000
+const port = process.env.port
 const Mongo_URL = process.env.Mongo_URL
+
+
 app.use(express.json())
 
 app.get('/', (req, res) => {
     res.send("Red Survey 6000")
 })
 
-app.use('/survey',surveyRoute)
+app.use('/survey-login',surveyLoginRouter)
+app.use('/create-survey',createSurveyRoute)
 app.use('/taking-survey',takingSurveyRouter)
 app.use('/result-survey',resultOfSurveyRouter)
-
 
 mongoose.connect(Mongo_URL)
     .then(() => {

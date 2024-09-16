@@ -1,10 +1,11 @@
 import express from 'express'
+import { auth } from '../middleware/auth.js'
 import surveyModel from '../model/surveyModel.js'
 
 const router = express.Router()
 
 //get the result of the survey
-router.get('/retrieve/:id', async (req, res) => {
+router.get('/retrieve/:id', auth, async (req, res) => {
     const surveyId = req.params.id
     try {
         //Find the survey by its Id
